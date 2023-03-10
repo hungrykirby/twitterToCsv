@@ -19,8 +19,13 @@ class Tweet:
         self.local_media_path = twitter_data_path + '/data/tweets_media/'
 
     def call(self):
-        # self.__tweets_list()
-        pass
+        tl = self.__tweets_list(exclude_retweet=True)
+        # media を,区切りの文字列で結合する
+        tmp = [{**item, 'media_list': (lambda x: ', '.join(x['media']))(item)} for item in tl]
+        
+        # media という key をなくす
+        tmp = [{key: value for key, value in item.items() if key != 'media'} for item in tmp]
+        return tmp
 
     def call_with_pictures(self):
         tl = self.__tweets_list(exclude_retweet=True)
