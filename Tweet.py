@@ -19,7 +19,8 @@ class Tweet:
         self.local_media_path = twitter_data_path + '/data/tweets_media/'
 
     def call(self):
-        self.__tweets_list()
+        # self.__tweets_list()
+        pass
 
     def call_with_pictures(self):
         tl = self.__tweets_list(exclude_retweet=True)
