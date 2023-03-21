@@ -110,6 +110,8 @@ class Tweet:
                     s = s.replace(u['url'], u['expanded_url'])
         s = s.replace("\n", " ")
         s = s.replace("\r", " ")
+
+        s = s.replace(",", " ")
         return s
 
     def __tweet_url(self, t):
@@ -135,6 +137,12 @@ class Tweet:
         id_str = t['tweet']['id_str']
         for m in t['tweet']['extended_entities']['media']:
             tmp = m['media_url']
+
+            if 'ext_tw_video_thumb' in tmp:
+                continue
+            elif 'tweet_video_thumb' in tmp:
+                continue
+
             tmp = tmp.replace('http://pbs.twimg.com/media/', '')
             tmp = self.local_media_path + id_str + '-' + tmp
             ms.append(tmp)
